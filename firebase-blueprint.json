@@ -1,0 +1,218 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the MatuChat application.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The Firebase Auth UID." },
+        "userID": { "type": "integer", "description": "A public user ID (numeric)." },
+        "username": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "profilePic": { "type": "string" },
+        "coverPic": { "type": "string" },
+        "bio": { "type": "string" },
+        "is_owner": { "type": "boolean" },
+        "is_verified": { "type": "boolean" },
+        "is_food_local": { "type": "boolean" },
+        "is_matustar": { "type": "boolean" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "username", "email"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "A post, state, matu-post, or short.",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["state", "matu-post", "short", "x"] },
+        "media_type": { "type": "string", "enum": ["video", "image", "carousel"] },
+        "user_id": { "type": "string", "description": "UID of the author." },
+        "group_id": { "type": "string", "description": "UID of the group (optional)." },
+        "content": { "type": "string" },
+        "media_url": { "type": "string" },
+        "media_files": { "type": "array", "items": { "type": "string" } },
+        "hashtags": { "type": "string" },
+        "likes": { "type": "integer" },
+        "views": { "type": "integer" },
+        "duration": { "type": "integer" },
+        "is_live": { "type": "boolean" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["type", "user_id", "created_at"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "A comment on a post.",
+      "type": "object",
+      "properties": {
+        "post_id": { "type": "string" },
+        "parent_id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "content": { "type": "string" },
+        "likes": { "type": "integer" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["post_id", "user_id", "content", "created_at"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "A private or group message.",
+      "type": "object",
+      "properties": {
+        "sender_id": { "type": "string" },
+        "receiver_id": { "type": "string" },
+        "group_id": { "type": "string" },
+        "content": { "type": "string" },
+        "media_url": { "type": "string" },
+        "shared_post_id": { "type": "string" },
+        "is_group": { "type": "boolean" },
+        "is_read": { "type": "boolean" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["sender_id", "created_at"]
+    },
+    "Group": {
+      "title": "Group",
+      "description": "A community group.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "image_url": { "type": "string" },
+        "owner_id": { "type": "string" },
+        "members": { "type": "array", "items": { "type": "string" } },
+        "member_count": { "type": "number" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "owner_id", "created_at"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "A product for sale.",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "image_url": { "type": "string" },
+        "category": { "type": "string" },
+        "media_type": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["user_id", "title", "price", "created_at"]
+    },
+    "Event": {
+      "title": "Event",
+      "description": "An event.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "image_url": { "type": "string" },
+        "media_type": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "location": { "type": "string" },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" },
+        "group_id": { "type": "string" },
+        "organizer_id": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "date", "organizer_id", "created_at"]
+    },
+    "Chat": {
+      "title": "Chat",
+      "description": "A chat summary between two users.",
+      "type": "object",
+      "properties": {
+        "participants": { "type": "array", "items": { "type": "string" } },
+        "last_message": { "type": "string" },
+        "last_message_time": { "type": "string", "format": "date-time" },
+        "type": { "type": "string", "enum": ["direct", "group"] }
+      },
+      "required": ["participants", "last_message_time"]
+    },
+    "Streak": {
+      "title": "Streak",
+      "description": "A streak between users or in a group.",
+      "type": "object",
+      "properties": {
+        "user1_id": { "type": "string" },
+        "user2_id": { "type": "string" },
+        "group_id": { "type": "string" },
+        "count": { "type": "integer" },
+        "last_date": { "type": "string" },
+        "user1_sent": { "type": "boolean" },
+        "user2_sent": { "type": "boolean" },
+        "recoveries_left": { "type": "integer" },
+        "last_recovery_month": { "type": "integer" }
+      },
+      "required": ["count", "last_date"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles."
+    },
+    "/posts/{postId}": {
+      "schema": "Post",
+      "description": "Social posts."
+    },
+    "/posts/{postId}/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Comments on posts."
+    },
+    "/posts/{postId}/likes/{userId}": {
+      "schema": { "type": "object", "properties": { "created_at": { "type": "string", "format": "date-time" } } },
+      "description": "Likes on posts."
+    },
+    "/groups/{groupId}": {
+      "schema": "Group",
+      "description": "Community groups."
+    },
+    "/groups/{groupId}/members/{userId}": {
+      "schema": { "type": "object", "properties": { "joined_at": { "type": "string", "format": "date-time" } } },
+      "description": "Group members."
+    },
+    "/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Chat messages."
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Marketplace products."
+    },
+    "/events/{eventId}": {
+      "schema": "Event",
+      "description": "Events."
+    },
+    "/events/{eventId}/attendees/{userId}": {
+      "schema": { "type": "object", "properties": { "joined_at": { "type": "string", "format": "date-time" } } },
+      "description": "Event attendees."
+    },
+    "/streaks/{streakId}": {
+      "schema": "Streak",
+      "description": "User streaks."
+    },
+    "/chats/{chatId}": {
+      "schema": "Chat",
+      "description": "Chat summaries."
+    },
+    "/users/{userId}/following/{followingId}": {
+      "schema": { "type": "object", "properties": { "created_at": { "type": "string", "format": "date-time" } } },
+      "description": "Users followed by this user."
+    },
+    "/users/{userId}/followers/{followerId}": {
+      "schema": { "type": "object", "properties": { "created_at": { "type": "string", "format": "date-time" } } },
+      "description": "Users following this user."
+    },
+    "/users/{userId}/blocked/{blockedId}": {
+      "schema": { "type": "object", "properties": { "created_at": { "type": "string", "format": "date-time" } } },
+      "description": "Users blocked by this user."
+    }
+  }
+}

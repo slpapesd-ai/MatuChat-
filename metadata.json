@@ -1,0 +1,8 @@
+{
+  "name": "MATUCHAT!",
+  "description": "Una plataforma social enfocada en chats directos, grupos privados de amigos y descubrimiento de perfiles con una interfaz tipo swipe y estética cromo única.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

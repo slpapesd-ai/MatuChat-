@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Grotesk:wght@300;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  
+  --color-chrome-100: #f5f5f5;
+  --color-chrome-200: #e5e5e5;
+  --color-chrome-300: #d4d4d4;
+  --color-chrome-400: #a3a3a3;
+  --color-chrome-500: #737373;
+  --color-chrome-600: #525252;
+  --color-chrome-700: #404040;
+  --color-chrome-800: #262626;
+  --color-chrome-900: #171717;
+}
+
+@layer base {
+  body {
+    @apply bg-chrome-300 text-chrome-900 font-sans;
+    background-image: radial-gradient(circle at center, #e5e5e5 0%, #d4d4d4 100%);
+  }
+}
+
+.chrome-card {
+  @apply bg-chrome-200 border-2 border-chrome-900 shadow-[4px_4px_0px_0px_rgba(23,23,23,1)] rounded-none;
+}
+
+.chrome-button {
+  @apply bg-chrome-900 text-chrome-100 px-6 py-2 font-bold uppercase tracking-tighter transition-all hover:bg-chrome-800 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none shadow-[4px_4px_0px_0px_rgba(82,82,82,1)];
+}
+
+.chrome-input {
+  @apply bg-chrome-100 border-2 border-chrome-900 p-3 font-bold outline-none focus:ring-2 focus:ring-chrome-500;
+}
+
+.matu-title {
+  @apply font-display font-black italic uppercase text-5xl tracking-tighter;
+  -webkit-text-stroke: 1px black;
+}
+
